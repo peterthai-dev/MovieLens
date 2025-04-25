@@ -1,7 +1,7 @@
 ---
-title: '**MovieLens Recommendation System**'
+title: '**MovieLens Report**'
 subtitle: 'HarvardX Data Science Professional Certificate: PH125.9x Capstone 1'
-author: "_Altaf Moledina_"
+author: "_Peter Thai_"
 date: "_`r format(Sys.Date(), '%d %B, %Y')`_"
 output:
   pdf_document:
