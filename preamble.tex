@@ -1,7 +1,14 @@
-\renewcommand{\topfraction}{.9}
-\renewcommand{\bottomfraction}{.8}
-\renewcommand{\textfraction}{.1}
-\renewcommand{\floatpagefraction}{.7}
-\setcounter{topnumber}{4}
-\setcounter{bottomnumber}{4}
-\setcounter{totalnumber}{5}
+% ----------------------------
+% LaTeX Preamble for Float Control
+% ----------------------------
+
+% Allow floats (figures/tables) to occupy more space on the page
+\renewcommand{\topfraction}{0.9}         % Up to 90% of a page for floats at the top
+\renewcommand{\bottomfraction}{0.8}      % Up to 80% of a page for floats at the bottom
+\renewcommand{\textfraction}{0.1}        % Require only 10% of a page to be text
+\renewcommand{\floatpagefraction}{0.7}   % At least 70% of a float-only page must be occupied
+
+% Increase float counts per page
+\setcounter{topnumber}{4}                % Maximum number of floats at the top
+\setcounter{bottomnumber}{4}             % Maximum number of floats at the bottom
+\setcounter{totalnumber}{5}              % Maximum total floats per page
