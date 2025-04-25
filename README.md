@@ -1,10 +1,33 @@
-# movielens - Movie Recommendation System
-HarvardX: PH125.9x: Data Science - Capstone - Movielens
+# 🎬 MovieLens Report
+**HarvardX PH125.9x: Data Science Capstone Project**
 
-This repo was created to file and share the first of two projects within the HarvardX Data Science Professional Certificate (see https://courses.edx.org/dashboard/programs/3c32e3e0-b6fe-4ee4-bd4f-210c6339e074/)
+This repository contains the complete submission for the first of two capstone projects within the **HarvardX Data Science Professional Certificate** program, hosted on edX.
 
-The capstone-movielens project was to develop and refine an algorithm for a movie recommendation system using the MovieLens 10M dataset such that it was able to predict ratings with a residual mean square error of less than 0.86490.
+## 📌 Project Overview
 
-The .Rmd file is set up to load the previously downloaded, wrangled and tidied movielens data partitioned into edx and validation datsets. This fulldata.Rda file is not provided here. The code which generates this data was provided by HarvardX as part of the project brief and is included for information (eval=FALSE) within the .Rmd file in case required.
+The objective of this project was to design, implement, and validate a movie recommendation algorithm using the **MovieLens 10M dataset**. The goal was to achieve a **Root Mean Square Error (RMSE)** below **0.86490** on a hold-out test set, as specified in the project requirements.
 
-The .Rmd file also refers to a preamble.tex file which was created to relax the latex rules on floating figures/tables within the pdf report and a references.bib file which includes the references cited in the report in bibtex format. Both of these files are included in the repo for information.
+The solution involved:
+
+- Exploratory data analysis of user, movie, genre, and time-based features  
+- Development of progressive models using bias correction (movie, user, genre, year, review date)  
+- Regularization to reduce overfitting and improve generalization  
+- Final model validation using a hold-out dataset (`validation`)
+
+## 📂 Repository Structure
+
+- `movielens.Rmd` – Main R Markdown file containing:
+  - The complete modeling pipeline  
+  - Inline commentary and visualizations  
+  - Code to reproduce results (including RMSE calculations)  
+  - A disabled (`eval=FALSE`) code chunk that loads and partitions the dataset using the official HarvardX approach
+
+- `preamble.tex` – LaTeX configuration to control figure/table floating in the PDF output.
+
+- `references.bib` – BibTeX file with all sources cited in the report.
+
+> ⚠️ Note: The `.Rmd` assumes the existence of a `fulldata.RData` file containing pre-wrangled and partitioned `edx` and `validation` datasets. This file is not included here due to size constraints. Instructions and code to generate this file are included (but not evaluated) within the R Markdown file.
+
+## 📖 License & Attribution
+
+This project was completed as part of the **HarvardX PH125.9x: Data Science Capstone**, in accordance with the [edX Honor Code](https://courses.edx.org/edx-terms-service).
