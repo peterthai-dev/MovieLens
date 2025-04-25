@@ -1,5 +1,6 @@
 ###########################################################################################################################
-# Create edx set, validation set (final hold-out test set) - code provided by HarvardX: PH125.9x
+# --- Dataset Preparation: Partition MovieLens 10M dataset into training and validation sets ---
+# Source: MovieLens 10M (https://grouplens.org/datasets/movielens/10m/)
 ###########################################################################################################################
 
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
@@ -12,9 +13,7 @@ if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.
 if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 if(!require(scales)) install.packages("scales", repos = "http://cran.us.r-project.org")
 
-# MovieLens 10M dataset:
-# https://grouplens.org/datasets/movielens/10m/
-# http://files.grouplens.org/datasets/movielens/ml-10m.zip
+# Download and load MovieLens 10M dataset from GroupLens
  
 dl <- tempfile()
 download.file("http://files.grouplens.org/datasets/movielens/ml-10m.zip", dl)
@@ -32,7 +31,7 @@ movies <- as.data.frame(movies) %>% mutate(movieId = as.numeric(movieId),
 movielens <- left_join(ratings, movies, by = "movieId")
  
 # Validation set will be 10% of MovieLens data
-set.seed(1, sample.kind="Rounding")
+set.seed(1, sample.kind = "Rounding")
 test_index <- createDataPartition(y = movielens$rating, times = 1, p = 0.1, list = FALSE)
 edx <- movielens[-test_index,]
 temp <- movielens[test_index,]
@@ -159,7 +158,7 @@ edx %>% group_by(review_date) %>%
 # Methods - partition edx into train and test sets
 ###########################################################################################################################
 
-# Create train set and test sets from edx
+# Partition the edx dataset for model development (train/test split)
 set.seed(2020, sample.kind = "Rounding")
 test_index <- createDataPartition(y = edx$rating, times = 1, p = 0.2, list = FALSE)
 train_set <- edx[-test_index,]
@@ -178,7 +177,7 @@ train_set <- rbind(train_set, removed)
 rm(test_index, temp, removed) 
 
 ###########################################################################################################################
-# Methods - develop, train and test various iterations of the algorithm
+# --- Model Development: Progressive bias adjustments and RMSE evaluation ---
 ###########################################################################################################################
 
 # Create table and add target RMSE based on project objective
@@ -315,7 +314,7 @@ lambda <- lambdas[which.min(rmses)]
 regularised_rmse <- min(rmses) 
 
 ###########################################################################################################################
-# Methods - mutate validation dataset to reflect changes to edx (year, date of review) and run final hold-out test
+# --- Final Model Evaluation: Apply model to validation set and assess RMSE ---
 ###########################################################################################################################
 
 # Use mutate function to update validation dataset in line with changes made to edx
@@ -376,7 +375,7 @@ predicted_ratings <- validation %>%
 valid_rmse <- RMSE(validation$rating, predicted_ratings)
 
 ###########################################################################################################################
-# Results - visualise each of the effects modelled and tabulate RMSE for each iteration during training in edx dataset
+# --- Results Visualization: Effect distributions and performance comparison ---
 ###########################################################################################################################
 
 # Add naive RMSE result to table
@@ -439,7 +438,7 @@ data.frame(lambdas, rmses) %>%
 rmse_results <- rmse_results %>% rbind(c("Regularised Movie, User, Genre, Year and Review Date effects", round(regularised_rmse, 5), format(round(regularised_rmse-rmse_objective, 5), scientific = F)))
 
 ###########################################################################################################################
-# Results - tabulate result of final hold-out test of algorithm trained in full edx dataset to predict in validation datset
+# --- Final Validation Results: Comparison with project objective ---
 ###########################################################################################################################
 
 #Create table to show final validation RMSE result and project objective
